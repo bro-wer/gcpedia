@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/master.css'%}">
+<h1 id="test_text">Hello to quiz!</h1>
+
+
+
+{% if questionsList %}
+<p>Amount of questions in the database: {{ questionsList|length }}</p>
+
+<p>Tags for questions:</p>
+<table>
+  {% for elem in tagsList %}
+  <tr>
+    {# <td><input type="checkbox" aria-label="...">{{elem.tagName}} ({{elem.votes}})</input></td> #}
+    <td><label><input type="checkbox" name="checkbox" value="value"> {{elem.tagName}} ({{elem.votes}})</label></td>
+  </tr>
+  {% endfor %}
+</table>
+
+
+{% else%}
+<h1>There are no questions in the database!</h1>
+{% endif %}
+{% endblock %}

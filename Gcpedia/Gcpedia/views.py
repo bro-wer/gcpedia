@@ -1,5 +1,4 @@
 from django.views.generic import TemplateView
 
-# Create your views here.
 class HomePage(TemplateView):
-    template_name = "notes/index.html"
+    template_name = "index.html"
