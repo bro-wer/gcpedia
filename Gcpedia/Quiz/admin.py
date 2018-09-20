@@ -5,7 +5,7 @@ from . import models
 # define admin views
 
 class Quiz_answer_Admin(admin.ModelAdmin):
-    list_display = ['parentQuestion', 'answerIsValid', 'answerText']
+    list_display = ['answerId', 'parentQuestion', 'answerIsValid', 'answerText']
     list_filter = ['parentQuestion']
 
 class Quiz_question_Admin(admin.ModelAdmin):
