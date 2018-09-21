@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+{% load static %}
+{# {% load staticfiles %} #}
+
+{% block content %}
+{# <script src="quiz/js/newquestion.js"></script> #}
+
+<div class="container">
+  <form class="" action="." method="post">
+    {% csrf_token %}
+
+    <div id="content-div" class="form-group">
+      <label for="question-content">Question content:</label>
+      <textarea class="form-control" rows="5" id="question-content" name="question-content"></textarea>
+    </div>
+
+    <div id="answers-div" class="form-group">
+      <label for="answers">Possible answers:</label>
+      <div class="" id="answers">
+        {% for i in 'ABCDEF'|make_list %}
+
+        <div class="input-group">
+
+          <span class="input-group-addon"> {{i}}: </span>
+          <input type="text" id="answerText_{{i}}" name="answerText_{{i}}" class="form-control" aria-label="...">
+          <span class="input-group-addon">
+            <label><input type="checkbox" id="answerCorrect_{{i}}" name="answerCorrect_{{i}}"> Correct answer</label>
+          </span>
+        </div><!-- /input-group -->
+
+        {% endfor %}
+      </div>
+    </div>
+
+    <div id="questionSolved-div" class="form-group">
+      <label for="questionSolved">Answer truly correct?</label>
+      <br>
+      <label><input type="checkbox" id="questionSolved" name="questionSolved"> I am sure that answer is correct</label>
+    </div>
+
+    <div id="comment-div" class="form-group">
+      <label for="question-comment">Comment:</label>
+      <textarea class="form-control" rows="5" id="question-comment" name="question-comment"></textarea>
+    </div>
+
+    <div id="tags-div" class="form-group">
+      <label for="question-tags">Tags:</label>
+      <br>
+      {% for tagname in tagsList %}
+      <label><input type="checkbox" id="questionTag_{{tagname}}" name="questionTag_{{tagname}}"> {{tagname}}</label>
+      {% endfor %}
+    </div>
+
+    <label for="source-div">Question Source:</label>
+    <div id="source-div" class="dropdown">
+      <button class="btn btn-default dropdown-toggle" type="button" id="sourceDropdown" name="sourceDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+        <label name="sourceMenu">FreeCram</label>
+        <span class="caret"></span>
+        <input width="1px" type="text" name="questionSource" id="hiddenSourceDropdown" style="visibility: hidden;width: 5px;" value="FreeCram">
+      </button>
+      <ul class="dropdown-menu" aria-labelledby="sourceDropdown">
+        {% for source in sourceList %}
+        <li id="{{source}}" onclick="updateSourceDropdown(this.id)"><a href="#">{{source}}</a></li>
+        {% endfor %}
+      </ul>
+    </div>
+
+    <br>
+    <input type="submit" class="btn btn-success" value="Add new question!">
+
+  </form>
+</div>
+
+
+<script src="{% static 'js/quiz/newquestion.js' %}"></script>
+
+{% endblock %}

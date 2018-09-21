@@ -5,11 +5,11 @@ from . import models
 # define admin views
 
 class Quiz_answer_Admin(admin.ModelAdmin):
-    list_display = ['answerId', 'parentQuestion', 'answerIsValid', 'answerText']
+    list_display = ['answerId', 'parentQuestion', 'answerIsValid', 'answerText', 'created_at', 'updated_at']
     list_filter = ['parentQuestion']
 
 class Quiz_question_Admin(admin.ModelAdmin):
-    list_display = ['questionId', 'questionContent', 'questionSource', 'questionSolved']
+    list_display = ['questionId', 'questionContent', 'questionSource', 'questionSolved', 'created_at', 'updated_at']
     list_editable = ['questionSource']
     list_filter = ['questionSource', 'questionSolved']
 

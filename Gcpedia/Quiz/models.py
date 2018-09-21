@@ -1,4 +1,5 @@
 from django.db import models
+from datetime import datetime
 
 
 
@@ -20,7 +21,6 @@ class Quiz_source(models.Model):
     shortName = models.CharField(max_length = 8, editable=True, default='missing short name')
 
     def __str__(self):
-        # return "{} ({})".format(self.sourceName, self.shortName)
         return "{}".format(self.sourceName)
 
 class Quiz_question(models.Model):
@@ -32,6 +32,9 @@ class Quiz_question(models.Model):
     questionSource = models.ForeignKey(Quiz_source, on_delete=models.SET_NULL, null=True, related_name = "questionSource")
     questionTags = models.ManyToManyField(Quiz_tag)
 
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
     def __str__(self):
         return "({}) - {}...".format(str(self.questionId), str(self.questionContent[0:100]))
 
@@ -40,6 +43,9 @@ class Quiz_answer(models.Model):
     parentQuestion = models.ForeignKey(Quiz_question, on_delete=models.CASCADE)
     answerIsValid = models.BooleanField(default=False)
     answerText = models.TextField(default="Missing answer text", max_length = 256, editable=True)
+
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return "Parent ({}): {}".format(str(self.parentQuestion.questionId),
